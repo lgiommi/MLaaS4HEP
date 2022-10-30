@@ -16,10 +16,14 @@ import random
 
 # numpy modules
 import numpy as np
+try:
+    import uproot
+except ImportError:
+    pass
 
 # MLaaS4HEP modules
-from MLaaS4HEP.reader import RootDataReader, JsonReader, CsvReader, AvroReader, ParquetReader
-from MLaaS4HEP.utils import file_type, timestamp, global_cut, print_cut
+from reader import RootDataReader, JsonReader, CsvReader, AvroReader, ParquetReader
+from utils import file_type, timestamp, global_cut, print_cut
 
 
 class MetaDataGenerator(object):
@@ -234,6 +238,16 @@ class RootDataGenerator(object):
         self.start_idx = 0
         self.chunk_size = chunk_size
         self.stop_idx = chunk_size
+        if chunk_size == -1:
+            _ = 0
+            for fname in self.files:
+                istream_ = uproot.open(fname)
+                tree_ = istream_[branch]
+                nrows_ = tree_.num_entries
+                _ += nrows_
+            self.chunk_size = _
+            self.stop_idx = self.chunk_size
+            print(self.chunk_size)
         self.batch_size = batch_size
         self.verbose = verbose
         self.jdim = {}
@@ -333,6 +347,7 @@ class RootDataGenerator(object):
     def next_mix_files(self):
         '''Return next batch of events in form of data and mask vectors.
            Use it to equally mix events from different files'''
+
         if self.finish_file == True:
             raise StopIteration
         time_start = time.time()
@@ -370,6 +385,7 @@ class RootDataGenerator(object):
         mask = np.array(mask)
         if self.verbose:
             print(f"\nTime for handling a chunk: {time.time()-time_start}\n\n")
+            print(f"\nhandling a chunk throughput: {self.chunk_size / (time.time()-time_start)} evt/s\n")
         return data, mask, labels
 
     def read_data_mix_files(self, start=0, stop=100):

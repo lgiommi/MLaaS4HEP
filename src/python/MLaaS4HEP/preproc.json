@@ -1,0 +1,28 @@
+{
+  "new_branch":{
+    "log_DER_sum_pt": {
+      "def": "log(DER_sum_pt)",
+      "type": "flat",
+      "remove": "False",
+      "keys_to_remove": ["DER_sum_pt"]
+    },
+    "log_PRI_jet_leading_pt": {
+      "def": "log(PRI_jet_leading_pt)",
+      "type": "flat",
+      "remove": "False",
+      "keys_to_remove": ["PRI_jet_leading_pt"]
+    },
+    "log_PRI_lep_pt": {
+      "def": "log(PRI_lep_pt)",
+      "type": "flat",
+      "remove": "False",
+      "keys_to_remove": ["PRI_lep_pt"]
+    },
+    "log_PRI_tau_pt": {
+      "def": "log(PRI_tau_pt)",
+      "type": "flat",
+      "remove": "False",
+      "keys_to_remove": ["PRI_tau_pt"]
+    }
+  }
+}
