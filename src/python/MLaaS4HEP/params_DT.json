@@ -1,0 +1,20 @@
+{
+  "nevts": -1,
+  "shuffle": true,
+  "chunk_size": -1,
+  "batch_size": 100,
+  "identifier": "",
+  "metrics": true,
+  "branch": "myTree",
+  "selected_branches":"",
+  "exclude_branches": ["PRI_tau_phi",
+    "PRI_lep_phi", "PRI_met_phi", "PRI_jet_leading_phi",
+    "PRI_jet_subleading_phi", "DER_lep_eta_centrality",
+    "DER_mass_jet_jet", "DER_prodeta_jet_jet", "PRI_jet_all_pt",
+    "PRI_jet_leading_eta", "PRI_jet_subleading_eta",
+    "PRI_jet_subleading_pt", "PRI_met_sumet"
+  ],
+  "hist": "pdfs",
+  "redirector": "",
+  "verbose": 1
+}

@@ -1,0 +1,2 @@
+challenge_data/training_s.root
+challenge_data/training_b.root

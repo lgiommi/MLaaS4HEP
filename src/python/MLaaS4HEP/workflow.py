@@ -14,9 +14,10 @@ import os
 import sys
 import json
 import argparse
+import time
 
 # MLaaS4HEP modules
-from MLaaS4HEP.models import train_model
+from models import train_model
 
 class OptionParser(object):
     "OptionParser class for workflow arguments"
@@ -49,6 +50,7 @@ class OptionParser(object):
 
 def main():
     "Main function"
+    t_0 = time.time()
     optmgr = OptionParser()
     opts = optmgr.parser.parse_args()
     if opts.params and os.path.exists(opts.params):
@@ -78,6 +80,8 @@ def main():
         train_model(opts.model, files, labels, \
                 preproc=opts.preproc, params=params, specs=specs, \
                 fout=opts.fout, dtype=opts.dtype)
+        print("Final_time: {}".format(time.time() - t_0))
+        print("Final throughput: {}".format(500000 / (time.time()-t_0)))
         return
 
 if __name__ == '__main__':
