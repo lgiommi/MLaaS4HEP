@@ -195,6 +195,88 @@ whereas if a model is defined as in examples 3. and 4., the params.json file wil
   }
 ```
 
+#### Other examples
+
+###### 1. Scikit-learn MLPClassifier
+
+```
+from sklearn.neural_network import MLPClassifier
+
+def model():
+    mlp = MLPClassifier(solver="adam", learning_rate="adaptive", max_iter=350)
+    return mlp
+```
+
+###### 2. Scikit-learn AdaBoost
+
+```
+from sklearn.ensemble import AdaBoostClassifier
+from sklearn.tree import DecisionTreeClassifier
+
+
+def model():
+    ada = AdaBoostClassifier(DecisionTreeClassifier(max_depth=1), n_estimators=100, algorithm="SAMME.R", learning_rate=0.5)
+    return ada
+```
+
+###### 3. Scikit-learn RandomForest
+```
+from sklearn.ensemble import RandomForestClassifier
+
+def model():
+    rf = RandomForestRegressor(n_estimators=1000, random_state=42)
+    return rf
+```
+
+###### 4. Scikit-learn DecisionTree
+
+```
+from sklearn.tree import DecisionTreeClassifier
+
+def model():
+    dt = DecisionTreeClassifier(criterion='entropy', max_depth=10, random_state=42)
+    return dt
+```
+
+###### 5. Scikit-learn KNN
+```
+from sklearn.neighbors import KNeighborsClassifier
+
+def model():
+    knn = KNeighborsClassifier(n_neighbors=20)
+    return knn
+```
+
+###### 6. Scikit-learn Linear SVM
+```
+from sklearn import svm
+
+def model():
+    svc = svm.SVC(kernel="linear", C=0.025)
+    return svc
+```
+
+###### 7. Scikit-learn Gaussian Process Classifier
+
+```
+from sklearn.gaussian_process import GaussianProcessClassifier
+from sklearn.gaussian_process.kernels import RBF
+
+def model():
+   gpc = GaussianProcessClassifier(kernel=1*RBF(1.0))
+   return gpc
+```
+
+###### 8. Scikit-learn Logistic Regression
+
+```
+from sklearn.linear_model import LogisticRegression
+
+def model():
+   lr = LogisticRegression(penalty='l1', random_state=42)
+   return lr
+```
+
 ### Supporting performance Metrics
 
 Since metrics are used to quantify the learning abilities of the models, it may be useful
